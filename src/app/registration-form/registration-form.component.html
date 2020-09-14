@@ -1,0 +1,17 @@
+<div class="registration">
+
+    <ul id="registration-tabs" class="registration-tabs" (click)="changeActivity($event)">
+        <li data-tab="0" class="registration-tabs-tab" [class.active-tab]="isActive">Sign In</li>
+        <li data-tab="1" class="registration-tabs-tab" [class.active-tab]="!isActive">Sign Up</li>
+    </ul>
+
+    <form class="registration-form" id="form">
+        
+        <span class="registration-form-label">Please enter your email</span>
+        <input type="email" [(ngModel)]="email" class="registration-form-input" name="email" />
+
+    <button class="registration-form-button" type="submit">{{logIn ? 'Log In' : 'Registration'}}</button>
+
+    </form>
+  
+  </div>

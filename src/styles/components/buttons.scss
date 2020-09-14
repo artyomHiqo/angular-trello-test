@@ -1,0 +1,60 @@
+.button-show-adding {
+  border-radius: 5px;
+  padding: 10px;
+  margin-left: 20px;
+}
+
+.button-show-adding:hover {
+  background-color: $color-background-list-hover;
+}
+
+.button-extras {
+  font-size: 20px;
+  color: $color-text;
+  height: 30px;
+  width: 30px;
+  border-radius: 3px;
+  text-align: center;
+}
+
+.button-extras:hover {
+  background-color: rgba(9, 30, 66, 0.08);
+}
+
+.add-card-button {
+  background-color: $color-background-board;
+  border-radius: 3px;
+  padding: 5px;
+  margin: 5px;
+}
+
+.add-card-button:hover {
+  opacity: 80%;
+}
+
+.button-close {
+  @include bg-rules;
+  width: 25px;
+  height: 25px;
+  padding: 5px;
+  margin: 5px;
+}
+
+.button-close:hover {
+  background-color: $color-background-list-hover;
+}
+
+.button-list-add {
+  background-color: $color-background-brand-button;
+  color: $color-second-text;
+  width: $list-size;
+  height: 50px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 5px;
+}
+
+.button-list-add:hover {
+  background-color: $color-background-list-hover;
+}

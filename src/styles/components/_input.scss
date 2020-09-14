@@ -1,0 +1,41 @@
+.registration-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  &-input,
+  &-button {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 15px;
+    border: 1px solid $color-background-brand-button;
+    border-radius: 2px;
+  }
+
+  &-input {
+    transition: 0.3s;
+
+    &:hover {
+      background: $color-background-board-button;
+      transition: 0.3s;
+    }
+  }
+
+  &-button {
+    margin-top: 40px;
+    background: $color-background-board;
+    color: $color-second-text;
+    transition: 0.3s;
+
+    &:hover {
+      background: $color-background-brand;
+      transition: 0.3s;
+    }
+  }
+
+  &-label {
+    @include font (14px, normal, normal, 20px);
+    margin: 20px 0 10px;
+    color: $color-text;
+  }
+}

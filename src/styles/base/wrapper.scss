@@ -1,0 +1,45 @@
+.header-wrapper,
+.main-wrapper {
+  padding: 10px 180px;
+
+  @include content-width-m {
+    padding: 10px 100px;
+  }
+
+  @include tablet-width {
+    padding: 10px 60px;
+  }
+
+  @include mobile-width {
+    padding: 10px 30px;
+  }
+
+  @include mobile-width-small {
+    padding: 10px 20px;
+  }
+}
+
+.list-wrapper {
+  @include listWrapper;
+  padding: 10px;
+  height: 100%;
+}
+
+.list-wrapper:first-child {
+  margin-left: 8px;
+}
+
+.list-card-details {
+  @include list-card-details;
+}
+
+.wrapper-adding-card {
+  display: flex;
+  align-items: center;
+}
+
+.wrapper-for-add-list {
+  background-color: $color-background-list;
+  border-radius: 5px;
+  padding: 10px;
+}
