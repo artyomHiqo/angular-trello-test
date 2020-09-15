@@ -8,24 +8,17 @@ import { AuthService } from '../auth.service';
 })
 export class RegistrationFormComponent {
 
-  isActive = true;
   logIn = true;
-  email = 'mail';
+  email: string;
+  login: string;
+  password: string;
 
   constructor(private authService: AuthService) {
 
   }
 
-  changeActivity(event) {
-
-    if (event.target.getAttribute('data-tab') === '0') {
-      console.log(1);
-    } else {
-      console.log(2);
-    }
-
+  changeActivity(isLogin): void {
+    this.logIn = isLogin;
     // this.authService.two()
-
-
   }
 }
