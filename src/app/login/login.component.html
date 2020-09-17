@@ -11,13 +11,16 @@
     <input type="email" [(ngModel)]="email" class="registration-form-input" name="email" placeholder="Enter your email" />
 
     <span *ngIf="!logIn" class="registration-form-label">Please enter your login name</span>
-    <input *ngIf="!logIn" type="text" [(ngModel)]="login" class="registration-form-input" name="name" placeholder="Enter your login name" />
+    <input *ngIf="!logIn" type="text" [(ngModel)]="name" class="registration-form-input" name="name" placeholder="Enter your login name" />
 
     <span class="registration-form-label">Please enter your password</span>
     <input type="password" [(ngModel)]="password" class="registration-form-input" name="password" placeholder="Enter your password" />
 
 
-    <button class="registration-form-button" type="submit">{{logIn ? 'Log In' : 'Registration'}}</button>
+    <button *ngIf="logIn" class="registration-form-button" type="submit" (click)="signIn()">Log In</button>
+    <button *ngIf="!logIn" class="registration-form-button" type="submit" (click)="signUp()">Register</button>
+
   </form>
   
 </div>
+
