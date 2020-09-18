@@ -31,7 +31,6 @@ export class LoginComponent implements OnInit {
 
   validateForm(event) {
     event.preventDefault();
-
   }
 
   async submitForm(data) {
