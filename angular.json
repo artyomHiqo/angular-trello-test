@@ -30,6 +30,12 @@
             "styles": [
               "src/styles.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "app/styles/utils",
+                "styles/theme"
+              ]
+          },
             "scripts": []
           },
           "configurations": {
