@@ -29,13 +29,13 @@
             ],
             "styles": [
               "src/styles.scss"
-            ],
-            "stylePreprocessorOptions": {
+          ],
+          "stylePreprocessorOptions": {
               "includePaths": [
-                "app/styles/utils",
-                "styles/theme"
+                  "styles/theme"
               ]
           },
+      
             "scripts": []
           },
           "configurations": {

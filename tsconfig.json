@@ -17,8 +17,9 @@
       "dom"
     ],
     "baseUrl": "src",
-    // "paths": {
-    //   "@services/": ["app/core/services/*"]
-    // },
+    "paths": {
+      "@app-services/*": ["app/core/services/*"],
+      "@app-environments/*": ["app/environments/*"],
+    },
   }
 }
