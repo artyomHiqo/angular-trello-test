@@ -1,36 +1,49 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
-import { APIUrl } from '../constants';
+import { ApiService } from './api.service';
+import { User } from '../model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthService extends ApiService {
+  private user: User;
+  private isAuthorizedSubject = new BehaviorSubject<boolean>(undefined);
 
-  private _user$ = new BehaviorSubject<any>(null);
-
-  public readonly user$ = this._user$.asObservable();
-
-  constructor(private http: HttpClient) { }
-
-  get user(): any {
-    return this._user$.getValue();
+  constructor(http: HttpClient) {
+    super(http);
+    const isAuthorized = !!localStorage.getItem('token');
+    this.isAuthorizedSubject.next(isAuthorized);
   }
 
-  signIn(email: string, password: string): Promise<any> {
-    return this.http.post(`${APIUrl}/auth/singin`, {
-      email,
-      password
-    }).toPromise();
+  isAuthorized(): Observable<boolean> {
+    return this.isAuthorizedSubject.asObservable();
   }
 
-  signUp(email: string, name: string, password: string): Promise<any> {
-    return this.http.post(`${APIUrl}/auth/singup`, {
+  getUser(): User {
+    return this.user;
+  }
+
+  async signIn(email: string, password: string): Promise<User> {
+    const body = {
       email,
+      password,
+    };
+    const user = await this.postWithoutToken<User>('auth/signin', body);
+    this.isAuthorizedSubject.next(true);
+    return user;
+  }
+
+  async signUp(email: string, password: string, name: string): Promise<User> {
+    const body = {
+      email,
+      password,
       name,
-      password
-    }).toPromise();
+    };
+    const user = await this.postWithoutToken<User>('auth/signup', body);
+    this.isAuthorizedSubject.next(true);
+    return user;
   }
 }

@@ -4,7 +4,6 @@ import { map } from 'rxjs/operators';
 
 import { APIUrl } from '../constants';
 
-// import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'

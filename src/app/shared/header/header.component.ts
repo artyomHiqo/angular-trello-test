@@ -9,12 +9,6 @@ import { Observable } from 'rxjs';
 })
 export class HeaderComponent implements OnInit {
 
-  user$: Observable<any>;
-
-  constructor(private authService: AuthService) {
-    this.user$ = authService.user$;
-   }
-
   ngOnInit(): void {
   }
 
