@@ -31,9 +31,9 @@ export class AuthService extends ApiService {
       email,
       password,
     };
-    const user = await this.postWithoutToken<User>('auth/signin', body);
+    const { user } = await this.postWithoutToken('auth/signin', body);
     this.isAuthorizedSubject.next(true);
-    return user;
+    return this.user = user;
   }
 
   async signUp(email: string, password: string, name: string): Promise<User> {
@@ -42,8 +42,8 @@ export class AuthService extends ApiService {
       password,
       name,
     };
-    const user = await this.postWithoutToken<User>('auth/signup', body);
+    const { user } = await this.postWithoutToken('auth/signup', body);
     this.isAuthorizedSubject.next(true);
-    return user;
+    return this.user = user;
   }
 }
