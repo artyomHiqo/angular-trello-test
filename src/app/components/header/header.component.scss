@@ -1,0 +1,15 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-self: center;
+  padding: 0 200px;
+
+  &-icons {
+    display: flex;
+
+    &-person {
+      font-size: 40px;
+      margin-right: 10px;
+    }
+  }
+}

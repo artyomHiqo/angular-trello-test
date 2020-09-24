@@ -46,4 +46,8 @@ export class AuthService extends ApiService {
     this.isAuthorizedSubject.next(true);
     return this.user = user;
   }
+
+  logOut(): void {
+    this.clearToken();
+  }
 }

@@ -20,16 +20,16 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot
   ): Observable<boolean> {
     return this.authService.isAuthorized()
-    .pipe(
-      filter((isAuth) => {
-        return !isUndefined(isAuth);
-      }),
-      map((isAuth) => {
-        if (!isAuth) {
-          this.router.navigate(['/login'])
-        }
-        return isAuth;
-      })
-    );
+      .pipe(
+        filter((isAuth) => {
+          return !isUndefined(isAuth);
+        }),
+        map((isAuth) => {
+          if (!isAuth) {
+            this.router.navigate(['/login']);
+          }
+          return isAuth;
+        })
+      );
   }
 }

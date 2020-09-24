@@ -27,8 +27,8 @@ export class ApiService {
     localStorage.setItem('token', token);
   }
 
-  resetToken(token: string): void {
-    this.options.headers.delete('authorization', token);
+  clearToken(): void {
+    this.options.headers.delete('authorization');
     localStorage.removeItem('token');
   }
 

@@ -16,3 +16,6 @@
 // Components
 @import "styles/components/input";
 @import "styles/components/spinner";
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

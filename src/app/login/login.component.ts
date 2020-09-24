@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { AuthService } from '@app-services/auth.service';
+
 
 @Component({
   selector: 'app-login',
@@ -8,6 +11,7 @@ import { AuthService } from '@app-services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
+  private router: Router;
   logIn = true;
   email: string;
   name: string;
@@ -21,22 +25,13 @@ export class LoginComponent implements OnInit {
 
   async signIn(): Promise<void> {
     const response = await this.authService.signIn(this.email, this.password);
+    this.router.navigateByUrl('/dashboards');
     console.log(response);
   }
 
   async signUp(): Promise<void> {
     const response = await this.authService.signUp(this.email, this.name, this.password);
     console.log(response);
-  }
-
-  validateForm(event) {
-    event.preventDefault();
-  }
-
-  async submitForm(data) {
-    try {
-    } catch (error) {
-    }
   }
 
   ngOnInit(): void {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'app/core/services/auth.service';
-import { Observable } from 'rxjs';
+
+import { AuthService } from '@app-services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -8,6 +8,12 @@ import { Observable } from 'rxjs';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+
+  constructor(private authService: AuthService) { }
+
+  logOut(): void {
+    this.authService.logOut();
+  }
 
   ngOnInit(): void {
   }
