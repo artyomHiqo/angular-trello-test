@@ -39,10 +39,4 @@
       border-bottom: 3px solid $color-background-brand;
     }
   }
-
-  .error-span {
-    @include font (14px, normal, normal, 14px);
-    color: $error;
-    padding-top: 10px;
-  }
 }
