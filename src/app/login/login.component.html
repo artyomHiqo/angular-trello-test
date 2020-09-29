@@ -5,22 +5,12 @@
     <li data-tab="1" class="registration-tabs-tab" (click)="changeActivity(false)" [class.active-tab]="!logIn">Sign Up</li>
   </ul>
 
-  <form class="registration-form" id="form">
+  <div *ngIf="showSpinner$ | async" class="registration-spinner">
+    <mat-spinner></mat-spinner>
+  </div>
 
-    <span class="registration-form-label">Please enter your email</span>
-    <input type="email" [(ngModel)]="email" class="registration-form-input" name="email" placeholder="Enter your email" />
+  <app-signin *ngIf="logIn"></app-signin>
 
-    <span *ngIf="!logIn" class="registration-form-label">Please enter your login name</span>
-    <input *ngIf="!logIn" type="text" [(ngModel)]="name" class="registration-form-input" name="name" placeholder="Enter your login name" />
+  <app-signup *ngIf="!logIn"></app-signup>
 
-    <span class="registration-form-label">Please enter your password</span>
-    <input type="password" [(ngModel)]="password" class="registration-form-input" name="password" placeholder="Enter your password" />
-
-
-    <button *ngIf="logIn" class="registration-form-button" type="submit" (click)="signIn()">Log In</button>
-    <button *ngIf="!logIn" class="registration-form-button" type="submit" (click)="signUp()">Register</button>
-
-  </form>
-  
 </div>
-

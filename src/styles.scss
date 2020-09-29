@@ -1,18 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
 // Variables
-@import "./styles/variables/colors";
-@import "./styles/variables/fonts";
-@import "./styles/variables/sizes";
+@import "styles/variables/colors";
+@import "styles/variables/fonts";
+@import "styles/variables/sizes";
 
 // Mixins
-@import "./styles/utils/mixins";
+@import "styles/utils/mixins";
 
 // Base styles
-@import "./styles/base/wrapper";
-@import "./styles/base/reset";
-@import "./styles/base/typography";
-@import "./styles/components/buttons";
+@import "styles/base/wrapper";
+@import "styles/base/reset";
+@import "styles/base/typography";
+@import "styles/components/buttons";
 
 // Components
-@import "./styles/components/input";
-@import "./styles/components/spinner";
+@import "styles/components/input";
+@import "styles/components/spinner";
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

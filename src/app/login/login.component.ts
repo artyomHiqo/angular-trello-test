@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../core/services/auth.service';
+
+import { AuthService } from '@app-services/auth.service';
+import { SpinnerService } from '@app-services/spinner.service';
+import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'app-login',
@@ -8,39 +12,21 @@ import { AuthService } from '../core/services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
+  showSpinner$: Observable<boolean>;
   logIn = true;
-  email: string;
-  name: string;
-  password: string;
+  errors: string[];
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService,
+    private spinner: SpinnerService,
+  ) {
+    this.showSpinner$ = spinner.getValue();
+  }
 
   changeActivity(isLogin): void {
     this.logIn = isLogin;
   }
 
-  async signIn(): Promise<void> {
-    const response = await this.authService.signIn(this.email, this.password);
-    console.log(response);
-  }
-
-  async signUp(): Promise<void> {
-    const response = await this.authService.signUp(this.email, this.name, this.password);
-    console.log(response);
-  }
-
-  validateForm(event) {
-    event.preventDefault();
-
-  }
-
-  async submitForm(data) {
-    try {
-    } catch (error) {
-    }
-  }
-
   ngOnInit(): void {
   }
-
 }

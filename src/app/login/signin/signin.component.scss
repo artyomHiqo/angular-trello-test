@@ -1,0 +1,12 @@
+@import "styles/variables/colors";
+@import "styles/utils/mixins";
+
+input.ng-touched.ng-invalid{
+  border-color: red;
+}
+
+.error-span {
+  @include font (14px, normal, normal, 14px);
+  color: $error;
+  padding-top: 10px;
+}

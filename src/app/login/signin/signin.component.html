@@ -1,0 +1,13 @@
+<form [formGroup]='reactiveForm' (submit)="onSubmit()" class="registration-form">
+
+  <span class="registration-form-label">Please enter your email</span>
+  <input type="email" formControlName="email" class="registration-form-input" name="email" placeholder="Enter your email" />
+  <span class="error-span" *ngIf="isValid('email')">* Wrong email</span>
+
+  <span class="registration-form-label">Please enter your password</span>
+  <input type="password" formControlName="password" class="registration-form-input" name="password" placeholder="Enter your password" />
+  <span class="error-span" *ngIf="isValid('password')">* Wrong password</span>
+
+  <button class="registration-form-button" type="submit">Log In</button>
+
+</form>

@@ -1,0 +1,16 @@
+<form [formGroup]='reactiveForm' (submit)="onSubmit($event)" class="registration-form">
+
+  <span class="registration-form-label">Please enter your email</span>
+  <input type="email" formControlName="email" class="registration-form-input" name="email" placeholder="Enter your email" />
+  <span class="error-span" *ngIf="isValid('email')">* Email does not meet the requirements</span>
+
+  <span class="registration-form-label">Please enter your login name</span>
+  <input type="text" class="registration-form-input" name="name" placeholder="Enter your login name" />
+
+  <span class="registration-form-label">Please enter your password</span>
+  <input type="password" formControlName="password" class="registration-form-input" name="password" placeholder="Enter your password" />
+  <span class="error-span" *ngIf="isValid('password')">* Password does not meet the requirements</span>
+
+  <button class="registration-form-button" type="submit">Register</button>
+
+</form>

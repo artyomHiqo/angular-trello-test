@@ -1,0 +1,19 @@
+<mat-toolbar color="primary" class="navbar">
+
+  <span>Trello</span>
+
+  <div class="navbar-icons">
+    <div class="navbar-icons-menu">
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="icon-button for a menu">
+        <mat-icon aria-hidden="false" aria-label="open menu icon" class="navbar-icons-menu-icon">arrow_drop_down</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item type="submit" (click)="logOut()">Logout</button>
+      </mat-menu>
+    </div>
+
+    <mat-icon aria-hidden="true" aria-label="Example home icon" class="navbar-icons-person">person</mat-icon>
+    
+  </div>
+</mat-toolbar>
+
