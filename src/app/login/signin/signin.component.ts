@@ -12,7 +12,6 @@ import { User } from 'app/core/model/user.model';
 export class SigninComponent implements OnInit {
 
   reactiveForm: FormGroup;
-  logIn = true;
   errors: string[];
   private isLogin = true;
 

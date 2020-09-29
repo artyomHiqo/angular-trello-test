@@ -5,6 +5,10 @@
     <li data-tab="1" class="registration-tabs-tab" (click)="changeActivity(false)" [class.active-tab]="!logIn">Sign Up</li>
   </ul>
 
+  <div *ngIf="showSpinner$ | async" class="registration-spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+
   <app-signin *ngIf="logIn"></app-signin>
 
   <app-signup *ngIf="!logIn"></app-signup>
