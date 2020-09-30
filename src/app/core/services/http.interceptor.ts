@@ -20,8 +20,8 @@ export class LoginHttpInterceptor implements HttpInterceptor {
             console.log(data);
             this.spinner.hide();
           },
-          error => {
-            console.log(error.message);
+          data => {
+            console.log(data);
             this.spinner.hide();
           }
         )
