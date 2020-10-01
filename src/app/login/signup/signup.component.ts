@@ -1,8 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AuthService } from '@app-services/auth.service';
+import { NotificationsService } from '@app-services/notifications.service';
+
 import { User } from 'app/core/model/user.model';
 
 @Component({
@@ -10,14 +12,15 @@ import { User } from 'app/core/model/user.model';
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss']
 })
-export class SignupComponent implements OnInit, OnDestroy {
+export class SignupComponent implements OnInit {
 
   reactiveForm: FormGroup;
   logIn = true;
-  errors: string[];
+  currentError: string;
 
   constructor(
     private authService: AuthService,
+    private notificationsService: NotificationsService,
     private router: Router,
     private form: FormBuilder,
   ) {}
@@ -45,7 +48,9 @@ export class SignupComponent implements OnInit, OnDestroy {
       this.router.navigate(['/dashboards']);
     }
     catch (error) {
-      this.errors = error;
+      this.currentError = error.message;
+      this.notificationsService.openSnackBar(this.currentError, 'close');
+      console.log(this.currentError);
     }
   }
 
@@ -64,9 +69,5 @@ export class SignupComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initForm();
-  }
-
-  ngOnDestroy(): void {
-    
   }
 }

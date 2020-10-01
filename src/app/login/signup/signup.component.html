@@ -1,3 +1,5 @@
+<div *ngIf="currentError"></div>
+
 <form [formGroup]='reactiveForm' (submit)="onSubmit($event)" class="registration-form">
 
   <span class="registration-form-label">Please enter your email</span>
