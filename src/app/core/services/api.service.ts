@@ -1,8 +1,10 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 
 import { APIUrl } from '../constants';
+import { getError } from '../utils/auth-errors';
 
 
 @Injectable({
@@ -33,7 +35,9 @@ export class ApiService {
 
   postWithoutToken<T>(path: string, body: any): Promise<T> {
     return this.http.post(`${APIUrl}/${path}`, body)
-      .pipe(map((response: any) => {
+      .pipe(
+        catchError(this.handleError),
+        map((response: any) => {
         if (response.success && response.data.token) {
           this.setToken(response.data.token);
         }
@@ -52,5 +56,12 @@ export class ApiService {
     return this.http.get(`${APIUrl}/${path}`, this.options)
       .pipe(map((response: any) => response.data as T))
       .toPromise();
+  }
+
+  private handleError(error: HttpErrorResponse): Observable<Error> {
+    if (error.error instanceof ErrorEvent) {
+      console.error('An error occurred:', error.error);
+    }
+    return throwError(getError(error.error.message));
   }
 }

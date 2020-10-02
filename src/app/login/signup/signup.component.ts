@@ -15,7 +15,6 @@ import { User } from 'app/core/model/user.model';
 export class SignupComponent implements OnInit {
 
   reactiveForm: FormGroup;
-  logIn = true;
   currentError: string;
 
   constructor(
@@ -48,9 +47,7 @@ export class SignupComponent implements OnInit {
       this.router.navigate(['/dashboards']);
     }
     catch (error) {
-      this.currentError = error.message;
-      this.notificationsService.openSnackBar(this.currentError, 'close');
-      console.log(this.currentError);
+      this.notificationsService.openSnackBar(error.message, 'close');
     }
   }
 

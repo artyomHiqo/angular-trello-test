@@ -16,12 +16,10 @@ export class LoginHttpInterceptor implements HttpInterceptor {
     return next.handle(req)
       .pipe(
         tap(
-          data => {
-            console.log(data);
+          () => {
             this.spinner.hide();
           },
-          data => {
-            console.log(data);
+          () => {
             this.spinner.hide();
           }
         )
