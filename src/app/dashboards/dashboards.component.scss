@@ -1,0 +1,27 @@
+@import "styles/variables/colors.scss";
+
+.board,
+.board-add {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  width: 90%;
+  height: 170px;
+  background-color: $dashboard-color;
+
+  &-title {
+    width: 100%;
+  }
+}
+
+.action-icons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dashboards-spinner {
+  display: flex;
+  justify-content: center;
+  margin-top: 300px;
+}

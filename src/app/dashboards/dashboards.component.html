@@ -1,27 +1,47 @@
-<mat-grid-list cols="4" rowHeight="2:1">
-  <mat-grid-tile *ngFor="let board of board$ | async">
-    <mat-card>
-      <mat-card-header>
+<div *ngIf="showSpinner$ | async" class="dashboards-spinner">
+  <mat-spinner></mat-spinner>
+</div>
+
+<mat-grid-list cols="4" rowHeight="220px">
+  <mat-grid-tile *ngFor="let board of board$ | async; trackBy: trackById">
+    <mat-card class="board">
+      <mat-card-header class="board-title">
         <mat-card-title>{{ board.title }}</mat-card-title>
       </mat-card-header>
-      <mat-card-actions>
-        <button mat-button><span class="material-icons">delete</span></button>
-        <button mat-button><span class="material-icons">create</span></button>
+      <mat-card-actions class="action-icons">
+
+        <button 
+          mat-button
+        >
+          <span class="material-icons" (click)='deleteBoard(board._id)'>delete</span>
+        </button>
+
+        <button 
+          mat-button
+        >
+          <span class="material-icons">create</span>
+        </button>
+
       </mat-card-actions>
     </mat-card>
   </mat-grid-tile>
   <mat-grid-tile>
-    <mat-card>
-      <mat-form-field>
-        <input matInput #boardTitle />
-      </mat-form-field>
-      <mat-card-actions>
-        <button mat-button (click)='addBoard(boardTitle.value)'><span class="material-icons">add</span></button>
-      </mat-card-actions>
+    <mat-card class="board-add">
+      <form [formGroup]="singleForm">
+        <mat-form-field class="board-title">
+          <input matInput formControlName='title' #boardTitle type="text" />
+        </mat-form-field>
+        <mat-card-actions>
+  
+          <button 
+            mat-raised-button 
+            (click)="addBoard(boardTitle.value)"
+          >
+            Click Me
+          </button>
+  
+        </mat-card-actions>
+      </form>
     </mat-card>
   </mat-grid-tile>
 </mat-grid-list>
-
-
-
-
