@@ -18,7 +18,10 @@ export class DashboardsComponent implements OnInit {
 
   singleForm: FormGroup;
   showSpinner$: Observable<boolean>;
-  board$: Observable<Board[]>;
+  boards$: Observable<Board[]>;
+  boardTitle: string;
+  isTouched = true;
+
   trackById = trackById;
 
   constructor(
@@ -33,13 +36,24 @@ export class DashboardsComponent implements OnInit {
 
   async addBoard(boardTitle: string): Promise<void> {
     if (this.singleForm.valid) {
+      this.singleForm.reset();
       await this.boardService.addBoard(boardTitle);
       this.getBoards();
+      return;
     }
-    this.notificationsService.openSnackBar('please give a name to your board', 'close');
+    this.notificationsService.openSnackBar('please give correct name to your board', 'close');
   }
 
-  async deleteBoard(boardId): Promise<void> {
+  changeBoardTitle(): void {
+    this.isTouched = false;
+  }
+
+  async updateBoard(boardId: string, boardTitle: string): Promise<void> {
+    await this.boardService.updateBoard(boardId, boardTitle);
+    this.isTouched = true;
+  }
+
+  async deleteBoard(boardId: string): Promise<void> {
     await this.boardService.deleteBoard(boardId);
     this.getBoards();
   }
@@ -48,21 +62,14 @@ export class DashboardsComponent implements OnInit {
     this.boardService.sendBoardsRequest();
   }
 
-  isValid(controlName: string): boolean {
-    const control = this.singleForm.controls[controlName];
-    const result = control.invalid && control.touched;
-
-    return result;
-  }
-
   initForm(): void {
     this.singleForm = this.form.group({
-      title: ['', [Validators.required, Validators.maxLength(5)]]
+      title: ['', [Validators.required]]
     });
   }
 
   ngOnInit(): void {
-    this.board$ = this.boardService.board$;
+    this.boards$ = this.boardService._boards$;
     this.initForm();
   }
 }

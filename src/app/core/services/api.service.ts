@@ -68,6 +68,15 @@ export class ApiService {
       .toPromise();
   }
 
+  put<T>(path: string, body: string): Promise<T> {
+    return this.http.put(`${APIUrl}/${path}`, body, this.options)
+      .pipe(
+        catchError(this.handleError),
+        map((response: any) => response.data as T)
+      )
+      .toPromise();
+  }
+
   private handleError(error: HttpErrorResponse): Observable<Error> {
     if (error.error instanceof ErrorEvent) {
       console.error('An error occurred:', error.error);

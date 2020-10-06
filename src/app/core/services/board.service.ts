@@ -9,30 +9,34 @@ import { Board } from '../model/board.model';
   providedIn: 'root',
 })
 export class BoardService extends ApiService {
-  private _board$ = new BehaviorSubject<Board[]>([]);
+  [x: string]: any;
+  _boards$ = new BehaviorSubject<Board[]>([]);
 
-  public readonly board$ = this._board$.asObservable();
+  public readonly board$ = this._boards$.asObservable();
 
   constructor(http: HttpClient) {
     super(http);
   }
 
   get boards(): Board[] {
-    return this._board$.getValue();
+    return this._boards$.getValue();
   }
 
   async sendBoardsRequest(): Promise<void> {
     const { boards } = await this.get<{ boards: Board[] }>('boards');
-    console.log(boards);
-    this._board$.next(boards);
+    this._boards$.next(boards);
   }
 
   async addBoard(title: string): Promise<void> {
-    this._board$.next([...this.boards, { title } as Board]);
+    this._boards$.next([...this.boards, { title } as Board]);
     await this.post('boards', { title });
   }
 
-  async deleteBoard(boardId): Promise<void> {
+  async updateBoard(boardId: string, newTitle: string): Promise<void> {
+    await this.put(`boards/${boardId}`, newTitle);
+  }
+
+  async deleteBoard(boardId: string): Promise<void> {
     await this.delete(`boards/${boardId}`);
   }
 }

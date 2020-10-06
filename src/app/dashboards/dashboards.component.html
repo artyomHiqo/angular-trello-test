@@ -3,10 +3,17 @@
 </div>
 
 <mat-grid-list cols="4" rowHeight="220px">
-  <mat-grid-tile *ngFor="let board of board$ | async; trackBy: trackById">
+  <mat-grid-tile *ngFor="let board of boards$ | async; trackBy: trackById">
     <mat-card class="board">
       <mat-card-header class="board-title">
-        <mat-card-title>{{ board.title }}</mat-card-title>
+        <mat-card-title *ngIf="isTouched" (click)="changeBoardTitle()">{{ board.title }}</mat-card-title>
+        <mat-form-field  *ngIf="!isTouched" (focusout)="updateBoard(board._id, board.title)"> 
+          <input 
+            matInput 
+            #changedBoardTitle 
+            [(ngModel)]="board.title" 
+          />
+        </mat-form-field>
       </mat-card-header>
       <mat-card-actions class="action-icons">
 
@@ -16,11 +23,11 @@
           <span class="material-icons" (click)='deleteBoard(board._id)'>delete</span>
         </button>
 
-        <button 
+        <!-- <button 
           mat-button
         >
           <span class="material-icons">create</span>
-        </button>
+        </button> -->
 
       </mat-card-actions>
     </mat-card>
@@ -29,7 +36,7 @@
     <mat-card class="board-add">
       <form [formGroup]="singleForm">
         <mat-form-field class="board-title">
-          <input matInput formControlName='title' #boardTitle type="text" />
+          <input matInput formControlName='title' #boardTitle />
         </mat-form-field>
         <mat-card-actions>
   
