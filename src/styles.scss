@@ -4,8 +4,9 @@
 @import "styles/variables/fonts";
 @import "styles/variables/sizes";
 
-// Mixins
+// Utils
 @import "styles/utils/mixins";
+@import "styles/utils/restyle";
 
 // Base styles
 @import "styles/base/wrapper";

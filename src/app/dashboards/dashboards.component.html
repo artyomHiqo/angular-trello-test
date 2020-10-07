@@ -2,18 +2,21 @@
   <mat-spinner></mat-spinner>
 </div>
 
-<mat-grid-list cols="4" rowHeight="220px">
+<mat-grid-list [cols]="columns" rowHeight="220px">
   <mat-grid-tile *ngFor="let board of boards$ | async; trackBy: trackById">
     <mat-card class="board">
       <mat-card-header class="board-title">
-        <mat-card-title *ngIf="isTouched" (click)="changeBoardTitle()">{{ board.title }}</mat-card-title>
-        <mat-form-field  *ngIf="!isTouched" (focusout)="updateBoard(board._id, board.title)"> 
-          <input 
-            matInput 
-            #changedBoardTitle 
-            [(ngModel)]="board.title" 
-          />
-        </mat-form-field>
+        <mat-card-title *ngIf="board._id !== isTouchedId" (click)="changeBoardTitle(board._id)" class="board-title-header">{{ board.title }}</mat-card-title>
+    
+        <input 
+          *ngIf="board._id === isTouchedId" 
+          (focusout)="updateBoard(board._id, board.title)"
+          matInput 
+          #changedBoardTitle 
+          class="board-title-input"
+          [(ngModel)]="board.title" 
+        />
+
       </mat-card-header>
       <mat-card-actions class="action-icons">
 
@@ -22,12 +25,6 @@
         >
           <span class="material-icons" (click)='deleteBoard(board._id)'>delete</span>
         </button>
-
-        <!-- <button 
-          mat-button
-        >
-          <span class="material-icons">create</span>
-        </button> -->
 
       </mat-card-actions>
     </mat-card>

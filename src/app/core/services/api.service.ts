@@ -46,7 +46,7 @@ export class ApiService {
       .toPromise();
   }
 
-  post<T>(path: string, body: any): Promise<T> {
+  post<T>(path: string, body: object): Promise<T> {
     return this.http.post(`${APIUrl}/${path}`, body, this.options)
       .pipe(
         catchError(this.handleError),
@@ -68,7 +68,7 @@ export class ApiService {
       .toPromise();
   }
 
-  put<T>(path: string, body: string): Promise<T> {
+  put<T>(path: string, body: object): Promise<T> {
     return this.http.put(`${APIUrl}/${path}`, body, this.options)
       .pipe(
         catchError(this.handleError),
