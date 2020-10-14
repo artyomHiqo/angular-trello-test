@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { BoardService } from '@app-services/board.service';
 import { Observable, Subscription } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -9,6 +9,7 @@ import { SpinnerService } from '@app-services/spinner.service';
 import { trackById } from 'app/core/utils/track-by';
 import { NotificationsService } from '@app-services/notifications.service';
 import { filter, map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboards',
@@ -20,6 +21,8 @@ export class DashboardsComponent implements OnInit, OnDestroy {
   singleForm: FormGroup;
   showSpinner$: Observable<boolean>;
   boards$: Observable<Board[]>;
+  board$: Observable<void>;
+  boardId: string;
   boardTitle: string;
   isTouchedId = null;
 
@@ -28,6 +31,7 @@ export class DashboardsComponent implements OnInit, OnDestroy {
   columns = 4;
 
   trackById = trackById;
+  @ViewChild('changedBoardTitle') changedBoardTitle: ElementRef;
 
   constructor(
     private boardService: BoardService,
@@ -35,10 +39,10 @@ export class DashboardsComponent implements OnInit, OnDestroy {
     private form: FormBuilder,
     private notificationsService: NotificationsService,
     private mediaObserver: MediaObserver,
+    private router: Router,
   ) {
     this.getBoards();
     this.showSpinner$ = spinner.getValue();
-
     this.watcher = mediaObserver.asObservable()
       .pipe(
         filter((changes: MediaChange[]) => changes.length > 0),
@@ -66,6 +70,7 @@ export class DashboardsComponent implements OnInit, OnDestroy {
 
   changeBoardTitle(boardId: any): void {
     this.isTouchedId = boardId;
+    setTimeout(() => this.changedBoardTitle.nativeElement.focus());
   }
 
   async updateBoard(boardId: string, boardTitle: string): Promise<void> {
@@ -79,6 +84,11 @@ export class DashboardsComponent implements OnInit, OnDestroy {
 
   private getBoards(): void {
     this.boardService.sendBoardsRequest();
+  }
+
+  openBoard(boardId: string): void {
+    if (!boardId) { return; }
+    this.router.navigate([`/boards/${boardId}`]);
   }
 
   initForm(): void {

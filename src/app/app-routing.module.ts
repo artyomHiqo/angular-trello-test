@@ -7,17 +7,17 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/dashboards',
-    pathMatch: 'full',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./dashboards/dashboards.module').then(m => m.DashboardsModule),
   },
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then(m => m.LoginModule),
   },
   {
-    path: 'dashboards',
+    path: 'boards/:boardId',
     canActivate: [AuthGuard],
-    loadChildren: () => import('./dashboards/dashboards.module').then(m => m.DashboardsModule),
+    loadChildren: () => import('./board/board.module').then(m => m.BoardModule),
   },
   {
     path: '**',

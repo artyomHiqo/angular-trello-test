@@ -30,7 +30,7 @@ export class BoardService extends ApiService {
     this._boards$.next([...this.boards, { title } as Board]);
     await this.post('boards', { title });
 
-    this.sendBoardsRequest();
+    // this.sendBoardsRequest();
   }
 
   async updateBoard(boardId: string, newTitle: string): Promise<void> {

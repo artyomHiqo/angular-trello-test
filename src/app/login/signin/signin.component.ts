@@ -44,7 +44,7 @@ export class SigninComponent implements OnInit {
       if (this.isLogin) {
         await this.signIn();
       }
-      this.router.navigate(['/dashboards']);
+      this.router.navigate(['']);
     }
     catch (error) {
       this.notificationsService.openSnackBar(error.message, 'close');

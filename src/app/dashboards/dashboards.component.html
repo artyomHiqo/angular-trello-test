@@ -25,6 +25,12 @@
         >
           <span class="material-icons" (click)='deleteBoard(board._id)'>delete</span>
         </button>
+        <button 
+          mat-button
+          (click)="openBoard(board._id)"
+        >
+          open
+        </button>
 
       </mat-card-actions>
     </mat-card>

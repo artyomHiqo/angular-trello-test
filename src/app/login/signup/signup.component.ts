@@ -44,7 +44,7 @@ export class SignupComponent implements OnInit {
       if (!this.isValid('password') && !this.isValid('email')) {
         await this.signUp();
       }
-      this.router.navigate(['/dashboards']);
+      this.router.navigate(['']);
     }
     catch (error) {
       this.notificationsService.openSnackBar(error.message, 'close');
