@@ -1,1 +1,57 @@
-<p>dashboards works!</p>
+<div *ngIf="showSpinner$ | async" class="dashboards-spinner">
+  <mat-spinner></mat-spinner>
+</div>
+
+<mat-grid-list [cols]="columns" [rowHeight]="size">
+  <mat-grid-tile *ngFor="let board of boards$ | async; trackBy: trackById">
+    <mat-card class="board">
+      <mat-card-header class="board-title">
+        <mat-card-title *ngIf="board._id !== isTouchedId" (click)="changeBoardTitle(board._id)" class="board-title-header">{{ board.title }}</mat-card-title>
+    
+        <input 
+          *ngIf="board._id === isTouchedId" 
+          (focusout)="updateBoard(board._id, board.title)"
+          matInput 
+          #changedBoardTitle 
+          class="board-title-input"
+          [(ngModel)]="board.title" 
+        />
+
+      </mat-card-header>
+      <mat-card-actions class="action-icons">
+
+        <button 
+          mat-button
+        >
+          <span class="material-icons" (click)='deleteBoard(board._id)'>delete</span>
+        </button>
+        <button 
+          mat-button
+          (click)="openBoard(board._id)"
+        >
+          open
+        </button>
+
+      </mat-card-actions>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-card class="board-add">
+      <form [formGroup]="singleForm" class="add-form">
+        <mat-form-field class="board-title">
+          <input matInput formControlName='title' #boardTitle />
+        </mat-form-field>
+        <mat-card-actions>
+  
+          <button 
+            mat-raised-button 
+            (click)="addBoard(boardTitle.value)"
+          >
+            Click Me
+          </button>
+  
+        </mat-card-actions>
+      </form>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>

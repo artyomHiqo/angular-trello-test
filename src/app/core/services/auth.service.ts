@@ -10,7 +10,7 @@ import { User } from '../model';
 })
 export class AuthService extends ApiService {
   private user: User;
-  public isAuthorizedSubject = new BehaviorSubject<boolean>(undefined);
+  public isAuthorizedSubject = new BehaviorSubject<boolean>(null);
 
   constructor(
     http: HttpClient,

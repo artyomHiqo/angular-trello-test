@@ -2,10 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { AuthService } from '@app-services/auth.service';
-import { NotificationsService } from '@app-services/notifications.service';
-
-import { User } from 'app/core/model/user.model';
+import { AuthService, NotificationsService } from '@app-services/services';
+import { User } from 'app/core/model';
 
 @Component({
   selector: 'app-signup',
@@ -44,7 +42,7 @@ export class SignupComponent implements OnInit {
       if (!this.isValid('password') && !this.isValid('email')) {
         await this.signUp();
       }
-      this.router.navigate(['/dashboards']);
+      this.router.navigate(['']);
     }
     catch (error) {
       this.notificationsService.openSnackBar(error.message, 'close');
