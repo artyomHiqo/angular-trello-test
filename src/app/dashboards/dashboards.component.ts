@@ -3,13 +3,12 @@ import { BoardService } from '@app-services/board.service';
 import { Observable, Subscription } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MediaChange, MediaObserver } from '@angular/flex-layout';
-
-import { Board } from 'app/core/model/board.model';
-import { SpinnerService } from '@app-services/spinner.service';
-import { trackById } from 'app/core/utils/track-by';
-import { NotificationsService } from '@app-services/notifications.service';
 import { filter, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+
+import { SpinnerService, NotificationsService } from '@app-services/services';
+import { Board } from 'app/core/model';
+import { trackById } from 'app/core/utils/utils';
 
 @Component({
   selector: 'app-dashboards',
@@ -28,6 +27,7 @@ export class DashboardsComponent implements OnInit, OnDestroy {
   watcher: Subscription;
   activeMediaQuery = '';
   columns = 4;
+  size = 220;
 
   trackById = trackById;
   @ViewChild('changedBoardTitle') changedBoardTitle: ElementRef;

@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
-
-import { AuthService } from '@app-services/auth.service';
-import { SpinnerService } from '@app-services/spinner.service';
 import { Observable } from 'rxjs';
 
+import { AuthService, SpinnerService } from '@app-services/services';
 
 @Component({
   selector: 'app-login',

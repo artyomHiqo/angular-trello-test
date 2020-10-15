@@ -1,13 +1,12 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map, distinctUntilChanged, filter, tap, switchMap } from 'rxjs/operators';
+import { map, distinctUntilChanged } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 
-import { Board } from 'app/core/model/board.model';
-import { Column } from 'app/core/model/column.model';
-import { BoardService } from '@app-services/board.service';
-import { ColumnService } from '@app-services/column.service';
-import { trackById } from 'app/core/utils/track-by';
+import { ColumnService, BoardService } from '@app-services/services';
+import { Board, Column } from 'app/core/model';
+import { trackById } from 'app/core/utils/utils';
+
 
 @Component({
   selector: 'app-board',
@@ -68,9 +67,9 @@ export class BoardComponent implements OnInit {
     .pipe(
       map(params => params.boardId),
       distinctUntilChanged(),
-      ).subscribe(boardId => {
-        this.columnService.getColumns(boardId);
-        this.boardId = boardId;
-      });
+    ).subscribe(boardId => {
+      this.columnService.getColumns(boardId);
+      this.boardId = boardId;
+    });
   }
 }

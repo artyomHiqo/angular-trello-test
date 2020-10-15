@@ -10,27 +10,29 @@ import { Board } from '../model/board.model';
   providedIn: 'root'
 })
 export class ColumnService extends ApiService {
-  columns$ = new BehaviorSubject<Column[]>([]);
+  _columns$ = new BehaviorSubject<Column[]>([]);
 
-  public readonly column$ = this.columns$.asObservable();
+  public readonly columns$ = this._columns$.asObservable();
 
   constructor(http: HttpClient) {
     super(http);
   }
 
   get columns(): Column[] {
-    return this.columns$.getValue();
+    return this._columns$.getValue();
   }
 
   async getColumns(boardId: string): Promise<void> {
     if (!boardId) { return; }
     const { columns } = await this.get<Board>(`boards/${boardId}`);
-    this.columns$.next(columns);
+    this._columns$.next(columns);
   }
 
   async addColumn(boardId: string, title: string): Promise<void> {
-    this.columns$.next([...this.columns, {title} as Column]);
+    this._columns$.next([...this.columns, {title} as Column]);
     await this.post(`columns/${boardId}`, {title});
+
+    this.getColumns(boardId);
   }
 
   async updateColumn(columnId: string, newTitle: string): Promise<void> {
@@ -39,7 +41,7 @@ export class ColumnService extends ApiService {
 
   async deleteColumn(columnId: string): Promise<void> {
     await this.delete(`columns/${columnId}`);
-    const columns = this.columns$.getValue();
+    const columns = this._columns$.getValue();
 
     for (let i = 0; i < columns.length; i++) {
       if (columns[i]._id === columnId) {

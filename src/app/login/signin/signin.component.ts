@@ -2,10 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { AuthService } from '@app-services/auth.service';
-import { NotificationsService } from '@app-services/notifications.service';
-import { User } from 'app/core/model/user.model';
-import { getError } from 'app/core/utils/auth-errors';
+import { AuthService, NotificationsService } from '@app-services/services';
+import { User } from 'app/core/model';
 
 @Component({
   selector: 'app-signin',
