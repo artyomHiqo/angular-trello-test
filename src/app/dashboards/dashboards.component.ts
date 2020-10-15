@@ -21,7 +21,6 @@ export class DashboardsComponent implements OnInit, OnDestroy {
   singleForm: FormGroup;
   showSpinner$: Observable<boolean>;
   boards$: Observable<Board[]>;
-  board$: Observable<void>;
   boardId: string;
   boardTitle: string;
   isTouchedId = null;

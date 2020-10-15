@@ -33,9 +33,7 @@ export class BoardComponent implements OnInit {
     private columnService: ColumnService,
     private boardService: BoardService,
     private activatedRoute: ActivatedRoute,
-  ) {
-    // this.columnService.getColumns(this.boardId);
-  }
+  ) {}
 
   async addColumn(): Promise<void> {
     if (!this.columnTitle) { return; }
@@ -67,13 +65,12 @@ export class BoardComponent implements OnInit {
     this.columns$ = this.columnService.columns$;
 
     this.activatedRoute.params
-      .pipe(
-        map(params => params.boardId),
-        distinctUntilChanged(),
+    .pipe(
+      map(params => params.boardId),
+      distinctUntilChanged(),
       ).subscribe(boardId => {
         this.columnService.getColumns(boardId);
         this.boardId = boardId;
       });
-
   }
 }

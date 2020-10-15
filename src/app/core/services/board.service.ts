@@ -11,7 +11,7 @@ import { Board } from '../model/board.model';
 export class BoardService extends ApiService {
   _boards$ = new BehaviorSubject<Board[]>([]);
 
-  public readonly board$ = this._boards$.asObservable();
+  public readonly boards$ = this._boards$.asObservable();
 
   constructor(http: HttpClient) {
     super(http);
@@ -30,7 +30,7 @@ export class BoardService extends ApiService {
     this._boards$.next([...this.boards, { title } as Board]);
     await this.post('boards', { title });
 
-    // this.sendBoardsRequest();
+    this.sendBoardsRequest();
   }
 
   async updateBoard(boardId: string, newTitle: string): Promise<void> {

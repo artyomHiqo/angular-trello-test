@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 import { ApiService } from './api.service';
 import { Column } from '../model/column.model';
-import { APIUrl } from '../constants';
+import { Board } from '../model/board.model';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +24,7 @@ export class ColumnService extends ApiService {
 
   async getColumns(boardId: string): Promise<void> {
     if (!boardId) { return; }
-    const { columns } = await this.get<{ columns: Column[] }>(`columns/${boardId}`);
+    const { columns } = await this.get<Board>(`boards/${boardId}`);
     this.columns$.next(columns);
   }
 
@@ -40,8 +40,6 @@ export class ColumnService extends ApiService {
   async deleteColumn(columnId: string): Promise<void> {
     await this.delete(`columns/${columnId}`);
     const columns = this.columns$.getValue();
-    console.log(columns);
-    console.log(columnId);
 
     for (let i = 0; i < columns.length; i++) {
       if (columns[i]._id === columnId) {
