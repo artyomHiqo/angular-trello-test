@@ -10,7 +10,7 @@ import { User } from '../model';
 })
 export class AuthService extends ApiService {
   private user: User;
-  private isAuthorizedSubject = new BehaviorSubject<boolean>(undefined);
+  public isAuthorizedSubject = new BehaviorSubject<boolean>(undefined);
 
   constructor(
     http: HttpClient,
@@ -42,5 +42,6 @@ export class AuthService extends ApiService {
 
   logOut(): void {
     this.clearToken();
+    this.isAuthorizedSubject.next(false);
   }
 }

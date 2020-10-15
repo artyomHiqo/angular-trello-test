@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+
 import { AuthService } from '@app-services/auth.service';
+import { NotificationsService } from '@app-services/notifications.service';
 import { User } from 'app/core/model/user.model';
+import { getError } from 'app/core/utils/auth-errors';
 
 @Component({
   selector: 'app-signin',
@@ -12,11 +15,12 @@ import { User } from 'app/core/model/user.model';
 export class SigninComponent implements OnInit {
 
   reactiveForm: FormGroup;
-  errors: string[];
+  error: string;
   private isLogin = true;
 
   constructor(
     private authService: AuthService,
+    private notificationsService: NotificationsService,
     private router: Router,
     private form: FormBuilder,
   ) {}
@@ -43,7 +47,7 @@ export class SigninComponent implements OnInit {
       this.router.navigate(['/dashboards']);
     }
     catch (error) {
-      this.errors = error;
+      this.notificationsService.openSnackBar(error.message, 'close');
     }
   }
 
