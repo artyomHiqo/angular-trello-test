@@ -2,29 +2,14 @@
   <mat-grid-tile *ngFor="let column of columns$ | async; trackBy: trackById">
     <mat-card class="example-card">
 
-      <mat-card-title *ngIf="column._id !== isTouchedId">{{ column.title }}</mat-card-title>
-    
-        <input 
-          *ngIf="column._id === isTouchedId" 
-          (focusout)="updateColumn(column._id, column.title)"
-          matInput 
-          #changedColumnTitle 
-          [(ngModel)]="column.title" 
-        />
-
       <app-column></app-column>
+
       <mat-card-actions>
         <button 
           mat-button
           (click)="deleteColumn(column._id)"
         >
           Delete
-        </button>
-        <button 
-          mat-button
-          (click)="changeColumnTitle(column._id)" 
-        >
-          Edit
         </button>
       </mat-card-actions>
     </mat-card>
@@ -41,7 +26,7 @@
           mat-button
           (click) = "addColumn()"
         >
-        Add
+          Add
         </button>
       </mat-card-actions>
     </mat-card>
