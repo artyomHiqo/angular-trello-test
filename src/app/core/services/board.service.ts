@@ -27,7 +27,6 @@ export class BoardService extends ApiService {
   }
 
   async addBoard(title: string): Promise<void> {
-    this._boards$.next([...this.boards, { title } as Board]);
     await this.post('boards', { title });
 
     this.sendBoardsRequest();
@@ -39,12 +38,7 @@ export class BoardService extends ApiService {
 
   async deleteBoard(boardId: string): Promise<void> {
     await this.delete(`boards/${boardId}`);
-    const boards = this._boards$.getValue();
 
-    for (let i = 0; i < boards.length; i++) {
-      if (boards[i]._id === boardId) {
-        boards.splice(i, 1);
-      }
-    }
+    this.sendBoardsRequest();
   }
 }

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+
+import { Column } from '../../core/model/column.model'
 
 @Component({
   selector: 'app-column',
